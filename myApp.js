@@ -38,8 +38,16 @@ app.get("/json", function(req, res) {
   }
 });
 
+const middleware = function(req, res, next) {
+  req.time = new Date().toString();
+  next();
+};
 
-
+app.get("/now", middleware, function(req, res) {
+  res.send({
+    time: req.time
+  });
+});
 
 
 
