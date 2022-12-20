@@ -16,6 +16,9 @@ app.use(express.static(__dirname + "/public"));
 // Assets at the /public route
 app.use("/public", express.static(__dirname + "/public"));
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(function(req, res, next) {
 	let string = req.method + " " + req.path + " - " + req.ip;
 	console.log(string);
@@ -58,19 +61,29 @@ app.get("/:word/echo", function(req, res) {
 });
 
 app.route("/name")
-  .get(function (req, res) {
-    var firstName = req.query.first;
-    var lastName = req.query.last;
-    var { first: firstName, last: lastName } = req.query;
-    res.json({
-     name: `${firstName} ${lastName}`        
-  })
-  //.post(function (req, res) {
-    //res.send('Add a user')
-});
+	.get(function(req, res) {
+		var {
+			first: firstName,
+			last: lastName
+		} = req.query;
+		res.json({
+			name: `${firstName} ${lastName}`
+		});
+	})
+	.post(function(req, res) {
+		var {
+			first: firstName,
+			last: lastName
+		} = req.body;
+		console.log(`${firstName} ${lastName}`);
+		res.send({
+			name: `${firstName} ${lastName}`
+		});
+	});
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
+
+
 
 
 
