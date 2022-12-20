@@ -56,6 +56,18 @@ app.get("/:word/echo", function(req, res) {
   });
 });
 
+app.route("/name")
+  .get(function (req, res) {
+    var firstName = req.query.first;
+    var lastName = req.query.last;
+    var { first: firstName, last: lastName } = req.query;
+    res.json({
+     name: `${firstName} ${lastName}`        
+  })
+  //.post(function (req, res) {
+    //res.send('Add a user')
+});
+
 
 
 
