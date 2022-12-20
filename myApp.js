@@ -49,7 +49,12 @@ app.get("/now", middleware, function(req, res) {
   });
 });
 
-
+app.get("/:word/echo", function(req, res) {
+  const { word } = req.params;
+  res.json({
+    echo: word
+  });
+});
 
 
 
