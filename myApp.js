@@ -4,6 +4,7 @@ console.log("Hello World");
 
 const path = require("path");
 const indexPath = path.resolve("./views/index.html");
+var bodyParser = require("body-parser");
 
 /* app.get("/", function(req, res) {
   res.send("Hello Express");
@@ -68,7 +69,8 @@ app.route("/name")
     //res.send('Add a user')
 });
 
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 
